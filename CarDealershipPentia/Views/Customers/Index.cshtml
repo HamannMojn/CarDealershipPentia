@@ -10,10 +10,24 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-@using (Html.BeginForm("Index", "Customer", FormMethod.Get))
-{
-    @Html.TextBox("Search")<input type="submit" value="Search"/>
-}
+<form asp-action="Index" method="get">
+    <div>
+        <p>
+            Search By Name: <input type="text" name="_searchString" value="" />
+            <input type="submit" value="search"/>
+            <a asp-action="Index">Remove</a>
+        </p>
+    </div>
+</form>
+<form asp-action="Index" method="get">
+    <div>
+        <p>
+            Search By Street: <input type="text" name="_searchByStreet" value="" />
+            <input type="submit" value="search" />
+            <a asp-action="Index">Remove</a>
+        </p>
+    </div>
+</form>
 
 <table class="table">
     <thead>
@@ -25,19 +39,12 @@
                 @Html.DisplayNameFor(model => model.Surname)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Age)
+                @Html.DisplayNameFor(model => model.Address.Street)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address.ZipCode)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model) { 
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -46,16 +53,7 @@
                 @Html.DisplayFor(modelItem => item.Surname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                @Html.DisplayFor(modelItem => item.Address.Street)
             </td>
         </tr>
 }
